@@ -14,13 +14,10 @@ const initialState = {
 const LS_KEY_OPTIONS = 'LS_KEY_OPTIONS';
 
 function App() {
-  const [options, setOptions] = useState(initialState);
-
-  useEffect(() => {
+  const [options, setOptions] = useState(() => {
     const data = localStorage.getItem(LS_KEY_OPTIONS);
-    console.log(data);
-    if (data) setOptions(JSON.parse(data));
-  }, []);
+    return data ? JSON.parse(data) : initialState;
+  });
 
   useEffect(() => {
     localStorage.setItem(LS_KEY_OPTIONS, JSON.stringify(options));
